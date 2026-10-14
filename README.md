@@ -4,7 +4,7 @@
 
 An Android TV app that keeps your soundbar (or any other speaker) from going into standby.
 
-Many speakers fall asleep when they don't receive an audio signal for a while, so the first seconds of the next video or sound get lost while the speaker wakes up. Speaker Keep-Alive plays a short, quiet sine tone every few minutes. The speaker's silence detector sees a non-zero digital signal and stays awake, while the tone itself is barely audible.
+Many speakers switch themselves off when they don't receive an audio signal for a while. Some wake up on their own when sound appears, but the first seconds of the next video or sound get lost. Others don't wake up at all: they simply power off and have to be turned on by hand every time. Speaker Keep-Alive plays a short, quiet sine tone every few minutes. The speaker's silence detector sees a non-zero digital signal and stays awake, while the tone itself is barely audible.
 
 ## Features
 
