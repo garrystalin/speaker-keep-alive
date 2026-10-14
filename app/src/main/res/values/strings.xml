@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Speaker Keep-Alive</string>
+    <string name="status_on">Служба работает: сигнал каждые %1$d мин</string>
+    <string name="status_off">Служба остановлена</string>
+    <string name="btn_start">Запустить</string>
+    <string name="btn_stop">Остановить</string>
+    <string name="btn_interval">Интервал: %1$d мин</string>
+    <string name="btn_amplitude">Громкость сигнала: %1$d%%</string>
+    <string name="btn_freq">Частота: %1$d Гц</string>
+    <string name="btn_duration">Длительность: %1$d с</string>
+    <string name="btn_test">Проиграть тестовый сигнал</string>
+    <string name="notif_title">Колонка не уснёт</string>
+    <string name="notif_text">Тихий сигнал каждые %1$d мин</string>
+</resources>
