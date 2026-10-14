@@ -24,14 +24,14 @@
 
 ## Установка
 
-Готовых релизов пока нет, поэтому приложение нужно собрать самостоятельно (см. ниже) и поставить через `adb`:
+Скачайте APK на странице [Releases](../../releases) (или [соберите сами](#сборка)) и установите через `adb`:
 
 1. На телевизоре включите режим разработчика (Настройки → Об устройстве → несколько раз нажать на «Сборка») и «Отладку по USB» или «Отладку по сети».
 2. Подключитесь и установите APK:
 
    ```sh
    adb connect <IP-адрес-телевизора>:5555
-   adb install -r app/build/outputs/apk/release/app-release.apk
+   adb install -r speaker-keep-alive-v1.0.0.apk
    ```
 
 3. Запустите приложение из списка приложений Android TV и нажмите «Запустить».
@@ -54,7 +54,18 @@ sdk.dir=/путь/к/Android/Sdk
 
 APK появится в `app/build/outputs/apk/release/app-release.apk`.
 
-Release-сборка подписывается **debug-ключом** (см. `app/build.gradle.kts`). Это личная сборка для установки через `adb`, для публикации в магазинах она не подходит.
+Локальная release-сборка подписывается **debug-ключом** (см. `app/build.gradle.kts`). Она годится для установки через `adb`, но не для публикации в магазинах.
+
+## Выпуск релизов
+
+Пуш тега вида `v1.0.0` запускает [workflow Release](.github/workflows/release.yml): он собирает APK и публикует его как GitHub release.
+
+```sh
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+Тег задаёт `versionName`, номер запуска workflow — `versionCode`. Чтобы подписывать релизы собственным ключом, а не debug-ключом, добавьте секреты репозитория: `RELEASE_KEYSTORE_BASE64` (`base64 -w0 release.jks`), `RELEASE_KEYSTORE_PASSWORD`, `RELEASE_KEY_ALIAS`, `RELEASE_KEY_PASSWORD`. Ключ должен быть одним и тем же во всех релизах, иначе Android не даст обновить старую версию новой. [Workflow CI](.github/workflows/ci.yml) собирает debug-APK и запускает lint при каждом пуше в `main` и в pull request'ах.
 
 ## Подбор настроек
 

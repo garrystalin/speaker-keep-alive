@@ -26,14 +26,14 @@ Many speakers fall asleep when they don't receive an audio signal for a while, s
 
 ## Installation
 
-There are no prebuilt releases yet, so build the app yourself (see below) and install it with `adb`:
+Download the APK from the [Releases](../../releases) page (or [build it yourself](#building)) and install it with `adb`:
 
 1. On the TV, enable developer mode (Settings → About → tap "Build" several times) and turn on USB debugging or network debugging.
 2. Connect and install the APK:
 
    ```sh
    adb connect <tv-ip-address>:5555
-   adb install -r app/build/outputs/apk/release/app-release.apk
+   adb install -r speaker-keep-alive-v1.0.0.apk
    ```
 
 3. Launch the app from the Android TV app list and press the start button.
@@ -56,7 +56,18 @@ Then:
 
 The APK will be at `app/build/outputs/apk/release/app-release.apk`.
 
-The release build is signed with the **debug key** (see `app/build.gradle.kts`). It's meant as a personal build for installing via `adb` and isn't suitable for app stores.
+A local release build is signed with the **debug key** (see `app/build.gradle.kts`). It's meant for installing via `adb` and isn't suitable for app stores.
+
+## Releasing
+
+Pushing a tag like `v1.0.0` triggers the [Release workflow](.github/workflows/release.yml): it builds the APK and publishes it as a GitHub release.
+
+```sh
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+The tag sets `versionName`, the workflow run number sets `versionCode`. To sign releases with your own key instead of the debug one, add these repository secrets: `RELEASE_KEYSTORE_BASE64` (`base64 -w0 release.jks`), `RELEASE_KEYSTORE_PASSWORD`, `RELEASE_KEY_ALIAS`, `RELEASE_KEY_PASSWORD`. Use the same key for every release, otherwise Android won't let a new version update the old one. The [CI workflow](.github/workflows/ci.yml) builds a debug APK and runs lint on every push to `main` and on pull requests.
 
 ## Tuning
 
